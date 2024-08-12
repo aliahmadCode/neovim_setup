@@ -238,7 +238,7 @@ require("lazy").setup({
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 	"windwp/nvim-autopairs",
-
+	"mattn/emmet-vim",
 	"neovim/nvim-lspconfig",
 	-- Theme plugin
 	-- File explorer plugin
@@ -275,19 +275,6 @@ require("lazy").setup({
 	--    require('gitsigns').setup({ ... })
 	--
 	-- See `:help gitsigns` to understand what the configuration keys do
-	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
-		"lewis6991/gitsigns.nvim",
-		opts = {
-			signs = {
-				add = { text = "+" },
-				change = { text = "~" },
-				delete = { text = "_" },
-				topdelete = { text = "‾" },
-				changedelete = { text = "~" },
-			},
-		},
-	},
-
 	-- NOTE: Plugins can also be configured to run Lua code when they are loaded.
 	--
 	-- This is often very useful to both group configuration, as well as handle
@@ -302,6 +289,7 @@ require("lazy").setup({
 	-- Then, because we use the `config` key, the configuration only runs
 	-- after the plugin has been loaded:
 	--  config = function() ... end
+	"mattn/emmet-vim",
 
 	{ -- Useful plugin to show you pending keybinds.
 		"folke/which-key.nvim",
@@ -985,10 +973,72 @@ require("lazy").setup({
 --
 --
 --
-
+-- init.lua some configs for LSP
 require("config/cmp")
 
 local nvim_lsp = require("lspconfig")
+
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- Add tsserver for JavaScript and TypeScript
+nvim_lsp.tsserver.setup({
+	on_attach = function(client, bufnr)
+		-- Keybindings for LSP actions
+		local function buf_set_keymap(...)
+			vim.api.nvim_buf_set_keymap(bufnr, ...)
+		end
+		local opts = { noremap = true, silent = true }
+
+		buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+		buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+		buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+		buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+		buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+		buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+
+		-- Additional on_attach functionality...
+	end,
+	capabilities = capabilities,
+})
+
+-- Add eslint for linting
+nvim_lsp.eslint.setup({
+	on_attach = function(client, bufnr)
+		local function buf_set_keymap(...)
+			vim.api.nvim_buf_set_keymap(bufnr, ...)
+		end
+		local opts = { noremap = true, silent = true }
+
+		buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+		buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+		buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+		buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+		buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+		buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+
+		-- Additional on_attach functionality...
+	end,
+	capabilities = capabilities,
+})
+
+-- Add jsonls for JSON
+nvim_lsp.jsonls.setup({
+	on_attach = function(client, bufnr)
+		local function buf_set_keymap(...)
+			vim.api.nvim_buf_set_keymap(bufnr, ...)
+		end
+		local opts = { noremap = true, silent = true }
+
+		buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+		buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+		buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+		buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+		buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+		buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+
+		-- Additional on_attach functionality...
+	end,
+	capabilities = capabilities,
+})
 
 -- Enable clangd for C/C++
 nvim_lsp.clangd.setup({
@@ -1014,6 +1064,67 @@ nvim_lsp.clangd.setup({
 		buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 	end,
 })
+-- Add Tailwind CSS LSP for Tailwind CSS support
+nvim_lsp.tailwindcss.setup({
+	on_attach = function(client, bufnr)
+		local function buf_set_keymap(...)
+			vim.api.nvim_buf_set_keymap(bufnr, ...)
+		end
+		local opts = { noremap = true, silent = true }
+
+		buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+		buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+		buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+		buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+		buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+		buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+
+		-- Additional on_attach functionality...
+	end,
+	capabilities = capabilities,
+})
+
+-- Add CSS LSP for vanilla CSS support
+nvim_lsp.cssls.setup({
+	on_attach = function(client, bufnr)
+		local function buf_set_keymap(...)
+			vim.api.nvim_buf_set_keymap(bufnr, ...)
+		end
+		local opts = { noremap = true, silent = true }
+
+		buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+		buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+		buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+		buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+		buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+		buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+
+		-- Additional on_attach functionality...
+	end,
+	capabilities = capabilities,
+})
+
+-- Add HTML language server
+nvim_lsp.html.setup({
+	cmd = { "html-languageserver", "--stdio" },
+	filetypes = { "html", "htmldjango", "handlebars", "hbs" },
+	capabilities = capabilities,
+	on_attach = function(client, bufnr)
+		local function buf_set_keymap(...)
+			vim.api.nvim_buf_set_keymap(bufnr, ...)
+		end
+		local opts = { noremap = true, silent = true }
+
+		buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+		buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+		buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+		buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+		buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+		buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+		-- Additional keybindings
+	end,
+})
+
 -- Function to switch themes
 local function switch_theme(theme)
 	vim.cmd("colorscheme " .. theme)
@@ -1046,14 +1157,16 @@ vim.api.nvim_set_keymap("n", "<leader>tv", ":SwitchTheme vscode<CR>", { noremap 
 vim.api.nvim_set_keymap("n", "<leader>tg", ":SwitchTheme github_dark<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>tq", ":SwitchTheme PaperColor<CR>", { noremap = true, silent = true })
 
+vim.api.nvim_set_keymap("n", "<leader>,", "<cmd>normal! I// <CR><CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>.", "<cmd>normal! 0^xxlj<CR>", { noremap = true, silent = true })
 -- Key mapping to compile and run C++ code
 vim.api.nvim_set_keymap(
 	"n",
 	"<leader>r",
-	":w<CR>:split<CR>:term gcc -std=c17 % -o %:p:h/rooster && %:p:h/rooster<CR>",
+	":w<CR>:split<CR>:term gcc -std=c17 -lm % -o %:p:h/rooster && %:p:h/rooster<CR>",
 	{ noremap = true, silent = true }
 )
 
 -- Set default theme
-switch_theme("everforest")
+switch_theme("ayu")
 require("nvim-autopairs").setup({})
