@@ -70,3 +70,21 @@ end)
 keymap.set("n", "<leader>i", function()
 	require("craftzdog.lsp").toggleInlayHints()
 end)
+-- Ensure you have the Comment.nvim plugin loaded
+local comment = require("Comment.api")
+
+-- Keymap for toggling comments in normal mode
+vim.api.nvim_set_keymap(
+	"n",
+	"<C-e>",
+	'<cmd>lua require("Comment.api").toggle.linewise.current()<CR>',
+	{ noremap = true, silent = true }
+)
+
+-- Keymap for toggling comments in visual mode
+vim.api.nvim_set_keymap(
+	"v",
+	"<C-e>",
+	'<cmd>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>',
+	{ noremap = true, silent = true }
+)

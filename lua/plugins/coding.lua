@@ -1,6 +1,12 @@
 return {
 	-- Create annotations with one keybind, and jump your cursor in the inserted annotation
 	{
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
+	},
+	{
 		"danymat/neogen",
 		keys = {
 			{
