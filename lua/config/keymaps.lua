@@ -74,17 +74,14 @@ end)
 local comment = require("Comment.api")
 
 -- Keymap for toggling comments in normal mode
-vim.api.nvim_set_keymap(
-	"n",
-	"<C-e>",
-	'<cmd>lua require("Comment.api").toggle.linewise.current()<CR>',
-	{ noremap = true, silent = true }
-)
+vim.api.nvim_set_keymap("n", "<C-e>", '<cmd>lua require("Comment.api").toggle.linewise.current()<CR>', opts)
 
 -- Keymap for toggling comments in visual mode
-vim.api.nvim_set_keymap(
-	"v",
-	"<C-e>",
-	'<cmd>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>',
-	{ noremap = true, silent = true }
-)
+vim.api.nvim_set_keymap("v", "<C-e>", '<cmd>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>', opts)
+
+-- toggle word wrap
+_G.toggle_wrap = function()
+	vim.wo.wrap = not vim.wo.wrap
+end
+-- Keymap to toggle word wrap using Alt + z
+vim.api.nvim_set_keymap("n", "<M-z>", ":lua toggle_wrap()<CR>", opts)
