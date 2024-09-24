@@ -11,6 +11,7 @@ return {
 		"marko-cerovac/material.nvim", -- material
 		"sainnhe/everforest", -- everforest
 		"Mofiqul/vscode.nvim", -- vscode
+
 		lazy = true,
 		priority = 1000,
 		opts = function()
