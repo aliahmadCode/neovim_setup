@@ -1,5 +1,14 @@
 local discipline = require("craftzdog.discipline")
+-- local ls = require('luasnip')
 
+-- local s = ls.snippet
+-- local i = ls.insert_node
+-- local t = ls.text_node
+-- s('fn', {
+-- t('void '), i(1, 'function_name'), t('('), i(2, 'params'), t({') {', '\t'}), i(3, '// function body'),
+-- t({'', '}'}),
+-- }),
+--
 discipline.cowboy()
 
 local keymap = vim.keymap

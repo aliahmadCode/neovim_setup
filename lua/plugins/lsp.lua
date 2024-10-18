@@ -14,10 +14,16 @@ return {
 				"css-lsp",
 				"clangd",
 				"pyright",
+				"google-java-format",
 			})
 		end,
 	},
-
+	{
+		"L3MON4D3/LuaSnip",
+		config = function()
+			require("luasnip.loaders.from_vscode").lazy_load()
+		end,
+	},
 	-- lsp servers
 	{
 		"neovim/nvim-lspconfig",
@@ -25,6 +31,9 @@ return {
 			inlay_hints = { enabled = false },
 			---@type lspconfig.options
 			servers = {
+				jdtls = {
+					-- Java Language Server settings
+				},
 				cssls = {},
 				tailwindcss = {
 					root_dir = function(...)
@@ -145,6 +154,17 @@ return {
 			},
 			setup = {},
 		},
+	},
+	{
+		"jose-elias-alvarez/null-ls.nvim",
+		opts = function()
+			local null_ls = require("null-ls")
+			null_ls.setup({
+				sources = {
+					null_ls.builtins.formatting.google_java_format, -- Add java formatter
+				},
+			})
+		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
