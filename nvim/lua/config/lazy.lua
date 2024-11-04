@@ -1,4 +1,34 @@
-local colors = "vscode"
+local colors = ""
+
+-- alpha
+-- rose-pine
+-- forest-night
+-- nova
+-- night-owl
+-- lucius
+--* oxocarbon
+-- apprentice
+-- everblush
+-- calvera-dark
+-- papercolor
+-- edge
+-- github
+-- nightfox
+-- onenord
+-- ayu
+-- palenightfall
+-- kanagawa
+-- no-clown-fiesta
+-- "onedark"
+-- "gruvbox"
+-- "vscode"
+-- "nord"
+-- "material"
+-- "tokyonight"
+-- "monokai"
+-- "everforest"
+-- "dracula"
+-- "catppuccin"
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -26,7 +56,12 @@ require("lazy").setup({
 					neovim = true,
 				},
 			},
+			rose_pine = {
+				variant = "dawn",
+				transparent = true,
+			},
 		},
+
 		-- import any extras modules here
 		{ import = "lazyvim.plugins.extras.linting.eslint" },
 		{ import = "lazyvim.plugins.extras.formatting.prettier" },

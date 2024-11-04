@@ -15,6 +15,7 @@ return {
 				"clangd",
 				"pyright",
 				"google-java-format",
+				"gopls",
 			})
 		end,
 	},
@@ -150,6 +151,15 @@ return {
 				pyright = {
 					-- Python LSP server settings
 					-- You can customize these settings as needed
+				},
+				gopls = {
+					-- Go LSP server settings
+					cmd = { "gopls" }, -- The command to start the Go language server
+					filetypes = { "go", "gomod" }, -- Supported file types
+					root_dir = function(fname)
+						return require("lspconfig.util").root_pattern("go.mod")(fname)
+							or require("lspconfig.util").root_pattern(".git")(fname)
+					end,
 				},
 			},
 			setup = {},
