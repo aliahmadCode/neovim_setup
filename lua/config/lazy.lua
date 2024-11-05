@@ -1,4 +1,4 @@
-local colors = ""
+local colors = "rose-pine"
 
 -- alpha
 -- rose-pine
