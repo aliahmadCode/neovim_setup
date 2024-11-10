@@ -1,4 +1,5 @@
 return {
+	{ "kyazdani42/nvim-web-devicons" },
 	-- messages, cmdline and the popupmenu
 	{
 		"folke/noice.nvim",

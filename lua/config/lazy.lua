@@ -1,34 +1,4 @@
-local colors = "rose-pine"
-
--- alpha
--- rose-pine
--- forest-night
--- nova
--- night-owl
--- lucius
---* oxocarbon
--- apprentice
--- everblush
--- calvera-dark
--- papercolor
--- edge
--- github
--- nightfox
--- onenord
--- ayu
--- palenightfall
--- kanagawa
--- no-clown-fiesta
--- "onedark"
--- "gruvbox"
--- "vscode"
--- "nord"
--- "material"
--- "tokyonight"
--- "monokai"
--- "everforest"
--- "dracula"
--- "catppuccin"
+local colors = "vscode"
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -55,10 +25,6 @@ require("lazy").setup({
 					lazyvim = true,
 					neovim = true,
 				},
-			},
-			rose_pine = {
-				variant = "dawn",
-				transparent = true,
 			},
 		},
 
