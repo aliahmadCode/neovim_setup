@@ -1,14 +1,5 @@
 local discipline = require("craftzdog.discipline")
--- local ls = require('luasnip')
 
--- local s = ls.snippet
--- local i = ls.insert_node
--- local t = ls.text_node
--- s('fn', {
--- t('void '), i(1, 'function_name'), t('('), i(2, 'params'), t({') {', '\t'}), i(3, '// function body'),
--- t({'', '}'}),
--- }),
---
 discipline.cowboy()
 
 local keymap = vim.keymap
@@ -69,15 +60,15 @@ keymap.set("n", "<C-w><down>", "<C-w>-")
 
 -- Diagnostics
 keymap.set("n", "<C-j>", function()
-	vim.diagnostic.goto_next()
+  vim.diagnostic.goto_next()
 end, opts)
 
 keymap.set("n", "<leader>r", function()
-	require("craftzdog.hsl").replaceHexWithHSL()
+  require("craftzdog.hsl").replaceHexWithHSL()
 end)
 
 keymap.set("n", "<leader>i", function()
-	require("craftzdog.lsp").toggleInlayHints()
+  require("craftzdog.lsp").toggleInlayHints()
 end)
 -- Ensure you have the Comment.nvim plugin loaded
 local comment = require("Comment.api")
@@ -90,7 +81,8 @@ vim.api.nvim_set_keymap("v", "<C-e>", '<cmd>lua require("Comment.api").toggle.li
 
 -- toggle word wrap
 _G.toggle_wrap = function()
-	vim.wo.wrap = not vim.wo.wrap
+  vim.wo.wrap = not vim.wo.wrap
 end
 -- Keymap to toggle word wrap using Alt + z
 vim.api.nvim_set_keymap("n", "<M-z>", ":lua toggle_wrap()<CR>", opts)
+--
