@@ -41,11 +41,11 @@ keymap.set("n", "<C-m>", "<C-i>", opts)
 
 -- New tab
 keymap.set("n", "te", ":tabedit")
-keymap.set("n", "<tab>", ":tabnext<Return>", opts)
-keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
+
 -- Split window
 keymap.set("n", "ss", ":split<Return>", opts)
 keymap.set("n", "sv", ":vsplit<Return>", opts)
+
 -- Move window
 keymap.set("n", "sh", "<C-w>h")
 keymap.set("n", "sk", "<C-w>k")
@@ -60,15 +60,15 @@ keymap.set("n", "<C-w><down>", "<C-w>-")
 
 -- Diagnostics
 keymap.set("n", "<C-j>", function()
-  vim.diagnostic.goto_next()
+	vim.diagnostic.goto_next()
 end, opts)
 
 keymap.set("n", "<leader>r", function()
-  require("craftzdog.hsl").replaceHexWithHSL()
+	require("craftzdog.hsl").replaceHexWithHSL()
 end)
 
 keymap.set("n", "<leader>i", function()
-  require("craftzdog.lsp").toggleInlayHints()
+	require("craftzdog.lsp").toggleInlayHints()
 end)
 -- Ensure you have the Comment.nvim plugin loaded
 local comment = require("Comment.api")
@@ -81,8 +81,11 @@ vim.api.nvim_set_keymap("v", "<C-e>", '<cmd>lua require("Comment.api").toggle.li
 
 -- toggle word wrap
 _G.toggle_wrap = function()
-  vim.wo.wrap = not vim.wo.wrap
+	vim.wo.wrap = not vim.wo.wrap
 end
 -- Keymap to toggle word wrap using Alt + z
 vim.api.nvim_set_keymap("n", "<M-z>", ":lua toggle_wrap()<CR>", opts)
+
+-- to close the current file
+vim.api.nvim_set_keymap("n", "<S-w>", ":bdelete<CR>", opts)
 --
