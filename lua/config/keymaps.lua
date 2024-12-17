@@ -90,3 +90,7 @@ vim.api.nvim_set_keymap("n", "<M-z>", ":lua toggle_wrap()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<S-w>", ":bdelete<CR>", opts)
 --
 vim.api.nvim_set_keymap("", "<RightMouse>", "<Nop>", opts)
+
+vim.g.mkdp_auto_start = 1 -- Automatically open the preview when editing Markdown
+vim.g.mkdp_open_to_the_world = 0 -- Keep the preview local
+vim.g.mkdp_browser = "" -- Use the default browser
