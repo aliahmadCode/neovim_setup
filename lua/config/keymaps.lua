@@ -89,3 +89,4 @@ vim.api.nvim_set_keymap("n", "<M-z>", ":lua toggle_wrap()<CR>", opts)
 -- to close the current file
 vim.api.nvim_set_keymap("n", "<S-w>", ":bdelete<CR>", opts)
 --
+vim.api.nvim_set_keymap("", "<RightMouse>", "<Nop>", opts)
