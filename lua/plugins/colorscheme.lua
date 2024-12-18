@@ -1,12 +1,13 @@
 return {
 	{
-		"Mofiqul/vscode.nvim",
 		"ellisonleao/gruvbox.nvim",
 		"folke/tokyonight.nvim", -- tokyonight
 		"crusoexia/vim-monokai", -- monokai
 		"joshdick/onedark.vim", -- onedark
 		"rose-pine/neovim", -- rose-pine
 		"rebelot/kanagawa.nvim", -- kanagawa
+		"chama-chomo/grail",
+
 		lazy = true,
 		priority = 1000,
 		opts = function()
@@ -14,6 +15,21 @@ return {
 				transparent = true,
 			}
 		end,
+	},
+
+	{
+		"Mofiqul/vscode.nvim",
+		config = function()
+			require("vscode").setup({
+				style = "dark",
+				transparent = false,
+				italic_comments = false,
+				disable_nvimtree_bg = true,
+			})
+		end,
+	},
+	{
+		"comfysage/gruvboxed",
 	},
 
 	{
@@ -39,7 +55,7 @@ return {
 		"LazyVim/LazyVim",
 		import = "lazyvim.plugins",
 		opts = {
-			colorscheme = "gruvbox-material",
+			colorscheme = "gruvboxed",
 			news = {
 				lazyvim = true,
 				neovim = true,
